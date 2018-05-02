@@ -1,0 +1,30 @@
+{
+  "name": "webapp",
+  "version": "1.0.0",
+  "description": "a web app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node -r dotenv/config server.js dotenv_config_path=config/.env"
+  },
+  "author": "chois",
+  "license": "MIT",
+  "dependencies": {
+    "@koa/cors": "^2.2.1",
+    "dotenv": "^5.0.1",
+    "koa": "^2.5.1",
+    "koa-bodyparser": "^4.2.0",
+    "koa-logger": "^3.2.0",
+    "koa-qs": "^2.0.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^4.0.2",
+    "ms": "^2.1.1",
+    "sequelize": "^4.37.6",
+    "socket.io": "^2.1.0",
+    "ws": "^5.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.11.0"
+  }
+}
