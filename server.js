@@ -13,8 +13,11 @@ const https = require('https')
 const WebSocket = require('ws')
 const httpsConf = require('./config/httpsConf')
 const socketHelper = require('./socket/socketHelper')
+const wssConfig = require('./config/wssConfig')
 
 const app = new Koa()
+
+app.use(require('./utils/X-Frame'))
 
 app.use(logger())
 
@@ -34,14 +37,16 @@ app.use(serve(path.resolve(__dirname, './src')))
 
 app.use(registerRouter(routeConfig))
 
+
 const server = https.createServer(httpsConf.options, app.callback())
     .listen(httpsConf.port, httpsConf.hostname, () => {
         console.log(`https server running at ${httpsConf.hostname} port ${httpsConf.port}`)
     })
 
 const wss = new WebSocket.Server({
-    origin: `https://${httpsConf.hostname}`,
+    // origin: `https://${httpsConf.hostname}`,
     server,
+    verifyClient: wssConfig.verifyClient,
 })
 
 wss.on('connection', (socket) => {
