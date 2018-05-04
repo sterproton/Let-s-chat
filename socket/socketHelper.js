@@ -1,7 +1,7 @@
 const Helper = require('./Helper')
 const {
     logger, broadcast, echo, parseMessage,
-} = require('./utils')
+} = require('./functions')
 
 const socketHelper = new Helper()
 

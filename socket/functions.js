@@ -26,6 +26,6 @@ const parseMessage = async (ctx, next) => {
 module.exports = {
     logger,
     echo,
-    broadcast,
     parseMessage,
+    broadcast,
 }
