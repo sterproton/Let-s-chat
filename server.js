@@ -31,6 +31,7 @@ app.use(cors({
     ],
 }))
 
+
 app.use(bodyParser())
 
 app.use(serve(path.resolve(__dirname, './src')))
@@ -46,12 +47,13 @@ const server = https.createServer(httpsConf.options, app.callback())
 const wss = new WebSocket.Server({
     // origin: `https://${httpsConf.hostname}`,
     server,
-    verifyClient: wssConfig.verifyClient,
+    // verifyClient: wssConfig.verifyClient,
+    clientTracking: true,
 })
 
 wss.on('connection', (socket) => {
     socket.on('message', (message) => {
-        socketHelper.callback(socket, message)
+        socketHelper.callback(wss, socket, message)
     })
 })
 

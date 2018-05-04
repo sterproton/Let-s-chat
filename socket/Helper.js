@@ -39,14 +39,23 @@ class SocketHelper {
         return this
     }
 
-    callback(socket, message) {
-        const ctx = this.createCtx(socket, message)
+    dispatch(dispatcher) {
+        this.use(async (ctx, next) => {
+            const middleware = dispatcher(ctx)
+            await middleware(ctx, next)
+            await next()
+        })
+    }
+
+    callback(server, socket, message) {
+        const ctx = this.createCtx(server, socket, message)
         const onerror = err => ctx.onerror(err)
         const fnMiddleware = compose(this.middleware)
         return fnMiddleware(ctx).catch(onerror)
     }
 
-    createCtx(skt, msg) {
+    createCtx(svr, skt, msg) {
+        const server = svr
         const socket = skt
         const message = msg
         const onerror = (err) => {
@@ -54,6 +63,7 @@ class SocketHelper {
             throw new Error('error occur in middleware')
         }
         const ctx = {
+            server,
             message,
             onerror,
             socket,
