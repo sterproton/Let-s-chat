@@ -13,7 +13,7 @@ const https = require('https')
 const WebSocket = require('ws')
 const httpsConf = require('./config/httpsConf')
 const socketHelper = require('./socket/socketHelper')
-const wssConfig = require('./config/wssConfig')
+// const wssConfig = require('./config/wssConfig')
 
 const app = new Koa()
 
@@ -56,4 +56,3 @@ wss.on('connection', (socket) => {
         socketHelper.callback(wss, socket, message)
     })
 })
-

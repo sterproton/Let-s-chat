@@ -23,9 +23,13 @@ const parseMessage = async (ctx, next) => {
     await next()
 }
 
+const newUser = async (ctx) => {
+    console.log(`new user login ${ctx.message.payload.id}`)
+}
 module.exports = {
     logger,
     echo,
     parseMessage,
     broadcast,
+    newUser,
 }

@@ -42,7 +42,7 @@ class SocketHelper {
     dispatch(dispatcher) {
         this.use(async (ctx, next) => {
             const middleware = dispatcher(ctx)
-            await middleware(ctx, next)
+            await middleware(ctx)
             await next()
         })
     }
